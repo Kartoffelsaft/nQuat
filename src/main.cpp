@@ -9,4 +9,5 @@ int main()
 
     q.print(); printf("\n");
     qn.print(); printf("\n");
+    (q + qn).print(); printf("\n");
 }

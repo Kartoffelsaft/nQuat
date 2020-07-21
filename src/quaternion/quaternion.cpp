@@ -22,6 +22,16 @@ Quaternion Quaternion::operator*(Quaternion const other) const
     );
 }
 
+Quaternion Quaternion::operator+(Quaternion const other) const
+{
+    return Quaternion(
+        this->r + other.r, 
+        this->i + other.i, 
+        this->j + other.j, 
+        this->k + other.k
+    );
+}
+
 Quaternion Quaternion::inverse() const
 {
     auto div = r*r + i*i + j*j + k*k;
