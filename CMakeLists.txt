@@ -11,6 +11,7 @@ add_executable(nquat
     ./src/main.cpp
     ./src/quaternion/quaternion.cpp
     ./src/vectors/vector3.cpp
+    ./src/window/window.cpp
 )
 
 target_link_libraries(nquat

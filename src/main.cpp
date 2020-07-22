@@ -5,6 +5,7 @@
 
 #include "quaternion/quaternion.h"
 #include "vectors/vector3.h"
+#include "window/window.h"
 
 int main()
 {
@@ -17,9 +18,7 @@ int main()
         Vector3(q * startV * qn).print(); printf("\n");
     }
 
-    initscr();
-    printw("doot");
-    refresh();
-    getch();
-    endwin();
+    Window w;
+    w.drawChar(3, 6, 'c');
+    w.waitForInput();
 }
