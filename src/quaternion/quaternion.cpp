@@ -9,7 +9,18 @@ Quaternion::Quaternion(float nr, float ni, float nj, float nk)
 {}
 
 Quaternion::Quaternion(float x, float y, float z)
-    : i{x}, j{y}, k{z}
+    : r{0}, i{x}, j{y}, k{z}
+{}
+
+Quaternion::Quaternion(Vector3 v)
+    : r{0}, i{v.x}, j{v.y}, k{v.z}
+{}
+
+Quaternion::Quaternion(Vector3 v, float angle)
+    : r{cos(angle)}, 
+      i{v.normalized().x * sin(angle)},
+      j{v.normalized().y * sin(angle)},
+      k{v.normalized().z * sin(angle)}
 {}
 
 Quaternion Quaternion::operator*(Quaternion const other) const
@@ -37,6 +48,9 @@ Quaternion Quaternion::inverse() const
     auto div = r*r + i*i + j*j + k*k;
     return Quaternion(r/div, -i/div, -j/div, -k/div);
 }
+
+Quaternion Quaternion::inverseSansNormalized() const
+{return Quaternion(r, -i, -j, -k);}
 
 Quaternion Quaternion::normalized() const
 {

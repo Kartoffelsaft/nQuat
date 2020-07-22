@@ -7,4 +7,5 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 add_executable(nquat
     ./src/main.cpp
     ./src/quaternion/quaternion.cpp
+    ./src/vectors/vector3.cpp
 )
