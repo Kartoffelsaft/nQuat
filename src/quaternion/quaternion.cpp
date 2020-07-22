@@ -33,6 +33,11 @@ Quaternion Quaternion::operator*(Quaternion const other) const
     );
 }
 
+Quaternion Quaternion::operator*(Vector3 const other) const
+{
+    return *this * Quaternion(other);
+}
+
 Quaternion Quaternion::operator+(Quaternion const other) const
 {
     return Quaternion(

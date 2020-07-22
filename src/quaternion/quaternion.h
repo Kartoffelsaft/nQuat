@@ -16,6 +16,7 @@ public:
     Quaternion(Vector3, float);
 
     Quaternion operator*(Quaternion const other) const;
+    Quaternion operator*(Vector3 const other) const;
     Quaternion operator+(Quaternion const other) const;
     Quaternion inverse() const;
     Quaternion inverseSansNormalized() const;

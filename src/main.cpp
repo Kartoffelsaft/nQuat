@@ -4,15 +4,15 @@
 
 int main()
 {
-    auto r = Quaternion(Vector3(1, 1, 1), 2.09);
-    auto rn = r.inverseSansNormalized();
-    auto vx = Quaternion(1, 0, 0);
-    auto vy = Quaternion(0, 1, 0);
-    auto vz = Quaternion(0, 0, 1);
+    auto const r = Quaternion(Vector3(1, 1, 1), 2.09);
+    auto const rn = r.inverseSansNormalized();
+    auto const vx = Vector3(1, 0, 0);
+    auto const vy = Vector3(0, 1, 0);
+    auto const vz = Vector3(0, 0, 1);
 
-    auto nvx = r * vx * rn;
-    auto nvy = r * vy * rn;
-    auto nvz = r * vz * rn;
+    Vector3 const nvx = r * vx * rn;
+    Vector3 const nvy = r * vy * rn;
+    Vector3 const nvz = r * vz * rn;
 
     nvx.print(); printf("\n");
     nvy.print(); printf("\n");
