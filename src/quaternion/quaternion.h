@@ -10,10 +10,10 @@ public:
     float j;
     float k;
 
-    Quaternion(float, float, float, float);
-    Quaternion(float, float, float);
-    Quaternion(Vector3);
-    Quaternion(Vector3, float);
+    Quaternion(float const, float const, float const, float const);
+    Quaternion(float const, float const, float const);
+    Quaternion(Vector3 const);
+    Quaternion(Vector3 const, float const);
 
     Quaternion operator*(Quaternion const other) const;
     Quaternion operator*(Vector3 const other) const;

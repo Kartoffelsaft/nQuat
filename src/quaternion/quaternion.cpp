@@ -4,19 +4,19 @@
 #include <cstdio>
 #include <math.h>
 
-Quaternion::Quaternion(float nr, float ni, float nj, float nk)
+Quaternion::Quaternion(float const nr, float const ni, float const nj, float const nk)
     : r{nr}, i{ni}, j{nj}, k{nk}
 {}
 
-Quaternion::Quaternion(float x, float y, float z)
+Quaternion::Quaternion(float const x, float const y, float const z)
     : r{0}, i{x}, j{y}, k{z}
 {}
 
-Quaternion::Quaternion(Vector3 v)
+Quaternion::Quaternion(Vector3 const v)
     : r{0}, i{v.x}, j{v.y}, k{v.z}
 {}
 
-Quaternion::Quaternion(Vector3 v, float angle)
+Quaternion::Quaternion(Vector3 const v, float const angle)
     : r{cos(angle)}, 
       i{v.normalized().x * sin(angle)},
       j{v.normalized().y * sin(angle)},

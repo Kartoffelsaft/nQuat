@@ -3,11 +3,11 @@
 #include <cstdio>
 #include <math.h>
 
-Vector3::Vector3(float nx, float ny, float nz)
+Vector3::Vector3(float const nx, float const ny, float const nz)
     : x{nx}, y{ny}, z{nz}
 {}
 
-Vector3::Vector3(Quaternion q)
+Vector3::Vector3(Quaternion const q)
     : x{q.i}, y{q.j}, z{q.k}
 {}
 

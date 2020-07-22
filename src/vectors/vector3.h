@@ -8,8 +8,8 @@ public:
     float y;
     float z;
 
-    Vector3(float, float, float);
-    Vector3(Quaternion);
+    Vector3(float const, float const, float const);
+    Vector3(Quaternion const);
 
     Vector3 normalized() const;
 
