@@ -12,6 +12,7 @@ add_executable(nquat
     ./src/quaternion/quaternion.cpp
     ./src/vectors/vector3.cpp
     ./src/window/window.cpp
+    ./src/rasterizer/rasterizer.cpp
 )
 
 target_link_libraries(nquat

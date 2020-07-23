@@ -29,7 +29,10 @@ std::tuple<int, int> Window::size() const
 }
 
 void Window::drawChar(int const x, int const y, char const c)
-{mvaddch(y, x, c); move(999, 999);}
+{mvaddch(y, x, c);}
+
+void Window::drawLine(int const x, int const y, char const c, int const l)
+{mvhline(y, x, c, l);}
 
 void Window::clean()
 {erase();}

@@ -11,7 +11,8 @@ struct Window
     std::tuple<int, int> middle() const;
     std::tuple<int, int> size() const;
 
-    void drawChar(int const x, int const y, char const c);
+    void drawChar(int const, int const, char const);
+    void drawLine(int const, int const, char const, int const);
     void clean();
     void refreshScreen();
     std::optional<int> getInput();
