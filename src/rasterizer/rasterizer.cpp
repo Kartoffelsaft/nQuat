@@ -1,10 +1,10 @@
 #include "rasterizer.h"
 
-void fillTriangle(Vector3 const a, Vector3 const b, Vector3 const c, Window& w)
+void fillTriangle(Vector2 const a, Vector2 const b, Vector2 const c, Window& w)
 {
-    Vector3 const & top = a.y < b.y? b.y < c.y? c : b : a.y < c.y? c : a;
-    Vector3 const & bottom = a.y > b.y? b.y > c.y? c : b : a.y > c.y? c : a;
-    Vector3 const & middle = (a.y != top.y && a.y != bottom.y)? a
+    Vector2 const & top = a.y < b.y? b.y < c.y? c : b : a.y < c.y? c : a;
+    Vector2 const & bottom = a.y > b.y? b.y > c.y? c : b : a.y > c.y? c : a;
+    Vector2 const & middle = (a.y != top.y && a.y != bottom.y)? a
                             :(b.y != top.y && b.y != bottom.y)? b
                             : c;
 
@@ -19,7 +19,7 @@ void fillTriangle(Vector3 const a, Vector3 const b, Vector3 const c, Window& w)
     {
         while(beginLine.y > middle.y)
         {
-            w.drawLine(beginLine.x, beginLine.y, '@', length + 1);
+            w.drawLine(beginLine.x, beginLine.y, '@', length + 0.5);
             beginLine.y -= 1;
             beginLine.x += dx1;
             length += dx2 - dx1;
@@ -27,7 +27,7 @@ void fillTriangle(Vector3 const a, Vector3 const b, Vector3 const c, Window& w)
 
         while(beginLine.y > bottom.y)
         {
-            w.drawLine(beginLine.x, beginLine.y, '@', length + 1);
+            w.drawLine(beginLine.x, beginLine.y, '@', length + 0.5);
             beginLine.y -= 1;
             beginLine.x += dx3;
             length += dx2 - dx3;
@@ -37,7 +37,7 @@ void fillTriangle(Vector3 const a, Vector3 const b, Vector3 const c, Window& w)
     {
         while(beginLine.y > middle.y)
         {
-            w.drawLine(beginLine.x, beginLine.y, '@', length + 1);
+            w.drawLine(beginLine.x, beginLine.y, '@', length + 0.5);
             beginLine.y -= 1;
             beginLine.x += dx2;
             length += dx1 - dx2;
@@ -45,7 +45,7 @@ void fillTriangle(Vector3 const a, Vector3 const b, Vector3 const c, Window& w)
 
         while(beginLine.y > bottom.y)
         {
-            w.drawLine(beginLine.x, beginLine.y, '@', length + 1);
+            w.drawLine(beginLine.x, beginLine.y, '@', length + 0.5);
             beginLine.y -= 1;
             beginLine.x += dx2;
             length += dx3 - dx2;

@@ -29,9 +29,9 @@ int main()
         auto [offsetX, offsetY] = w.middle();
 
         fillTriangle(
-            Vector3(points[0].x + offsetX, points[0].y + offsetY, 0), 
-            Vector3(points[1].x + offsetX, points[1].y + offsetY, 0), 
-            Vector3(points[2].x + offsetX, points[2].y + offsetY, 0), 
+            Vector2(points[0].x + offsetX, points[0].y + offsetY), 
+            Vector2(points[1].x + offsetX, points[1].y + offsetY), 
+            Vector2(points[2].x + offsetX, points[2].y + offsetY), 
             w
         );
         
