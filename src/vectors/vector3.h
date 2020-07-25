@@ -11,6 +11,7 @@ public:
     Vector3(float const, float const, float const);
     Vector3(Quaternion const);
 
+    Vector3 operator-(Vector3 const &) const;
     Vector3 normalized() const;
 
     void print() const;

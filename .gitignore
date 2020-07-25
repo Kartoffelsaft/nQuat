@@ -5,3 +5,4 @@ Makefile
 nquat
 .clangd
 compile_commands.json
+gmon.out
