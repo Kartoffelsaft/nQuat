@@ -21,7 +21,7 @@ int main()
     auto const tris = std::vector<size_t>{
         #include "../models/sphere.tri"
     };
-    auto const q = Quaternion(Vector3(1, 1, 0), 0.01);
+    auto const q = Quaternion(Vector3(1, 1, 0), 0.003);
     auto const qn = q.inverseSansNormalized();
 
     Window w;
@@ -30,6 +30,7 @@ int main()
     {
         w.clean();
         auto [offsetX, offsetY] = w.middle();
+        refreshRasterizerDists(w.size());
 
         for(auto i = 0; i < tris.size(); i += 3)
         {
@@ -40,6 +41,7 @@ int main()
             auto const vb = Vector3(pb[0], pb[1], pb[2]);
             auto const vc = Vector3(pc[0], pc[1], pc[2]);
 
+            auto const distance = (va.z + vb.z + vc.z) * 0.333;
             auto const appearance = getAppearance(va, vb, vc);
 
             auto const scale = 5;
@@ -48,7 +50,7 @@ int main()
                 Vector2(va.x * scale + offsetX, va.y * scale + offsetY), 
                 Vector2(vb.x * scale + offsetX, vb.y * scale + offsetY), 
                 Vector2(vc.x * scale + offsetX, vc.y * scale + offsetY), 
-                w, appearance
+                distance, w, appearance
             );
         }
         

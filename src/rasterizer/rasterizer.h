@@ -4,7 +4,17 @@
 #include "../vectors/vector3.h"
 #include "../quaternion/quaternion.h"
 #include "../window/window.h"
+#include <tuple>
 
-void fillTriangle(Vector2 const, Vector2 const, Vector2 const, Window&, char const);
+void refreshRasterizerDists(std::tuple<int, int> const);
+
+void fillTriangle(
+    Vector2 const, 
+    Vector2 const, 
+    Vector2 const, 
+    float const,
+    Window&, 
+    char const
+);
 
 char getAppearance(Vector3 const, Vector3 const, Vector3 const);

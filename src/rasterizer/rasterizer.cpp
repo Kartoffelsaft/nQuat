@@ -1,9 +1,42 @@
 #include "rasterizer.h"
+#include <algorithm>
+#include <cmath>
+#include <vector>
+
+std::vector<float> dists;
+
+void refreshRasterizerDists(std::tuple<int, int> const size)
+{
+    dists.clear();
+    dists.resize(std::get<0>(size) * std::get<1>(size), INFINITY);
+}
+
+void drawLine(
+    Vector2 const where, 
+    int const length, 
+    float const distance, 
+    Window& w,
+    char const appearance
+){
+    auto const [sX, sY] = w.size();
+    for(int i = std::max((int) where.x, 0); i < length + where.x; i++)
+    {
+        if(i > sX) break;
+        int const index = ((int) where.y) * sX + i;
+        if(index > dists.size() || index < 0) break;
+        if(distance < dists[index]) 
+        {
+            w.drawChar(i, where.y, appearance);
+            dists[index] = distance;
+        }
+    }
+}
 
 void fillTriangle(
     Vector2 const a, 
     Vector2 const b, 
     Vector2 const c, 
+    float const distance,
     Window& w, 
     char const appearance
 ){
@@ -24,7 +57,7 @@ void fillTriangle(
     {
         while(beginLine.y > middle.y)
         {
-            w.drawLine(beginLine.x, beginLine.y, appearance, length + 0.5);
+            drawLine(beginLine, length, distance, w, appearance);
             beginLine.y -= 1;
             beginLine.x += dx1;
             length += dx2 - dx1;
@@ -35,7 +68,7 @@ void fillTriangle(
 
         while(beginLine.y > bottom.y)
         {
-            w.drawLine(beginLine.x, beginLine.y, appearance, length + 0.5);
+            drawLine(beginLine, length, distance, w, appearance);
             beginLine.y -= 1;
             beginLine.x += dx3;
             length += dx2 - dx3;
@@ -45,7 +78,7 @@ void fillTriangle(
     {
         while(beginLine.y > middle.y)
         {
-            w.drawLine(beginLine.x, beginLine.y, appearance, length + 0.5);
+            drawLine(beginLine, length, distance, w, appearance);
             beginLine.y -= 1;
             beginLine.x += dx2;
             length += dx1 - dx2;
@@ -55,7 +88,7 @@ void fillTriangle(
 
         while(beginLine.y > bottom.y)
         {
-            w.drawLine(beginLine.x, beginLine.y, appearance, length + 0.5);
+            drawLine(beginLine, length, distance, w, appearance);
             beginLine.y -= 1;
             beginLine.x += dx2;
             length += dx3 - dx2;
@@ -65,7 +98,7 @@ void fillTriangle(
 
 char getAppearance(Vector3 const a,Vector3 const b,Vector3 const c)
 {
-    static char const * const appearances = "`.,:^*!#";
+    static char const * const appearances = "#*!:^,.`";
     Vector3 const v1 = b - a;
     Vector3 const v2 = c - a;
     Vector3 const normal = Vector3(Quaternion(v1) * Quaternion(v2)).normalized();
