@@ -6,13 +6,10 @@
 #include "../window/window.h"
 #include <tuple>
 
-void refreshRasterizerDists(std::tuple<int, int> const);
-
 void fillTriangle(
     Vector2 const, 
     Vector2 const, 
     Vector2 const, 
-    float const,
     Window&, 
     char const
 );

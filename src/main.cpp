@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <cstddef>
 #include <ratio>
 #include <stdio.h>
@@ -26,22 +27,41 @@ int main()
 
     Window w;
 
+    std::vector<size_t> trisByDist;
+    trisByDist.resize(tris.size()/3);
+    for(auto i = 0; i < trisByDist.size(); i++)
+    {trisByDist[i] = i;}
+
     while(!w.getInput().has_value())
     {
         w.clean();
         auto [offsetX, offsetY] = w.middle();
-        refreshRasterizerDists(w.size());
 
+        std::vector<float> triDists;
+        triDists.reserve(tris.size()/3);
         for(auto i = 0; i < tris.size(); i += 3)
         {
-            auto const * const pa = &points[3 * (tris[i + 0] - 1)];
-            auto const * const pb = &points[3 * (tris[i + 1] - 1)];
-            auto const * const pc = &points[3 * (tris[i + 2] - 1)];
+            auto const distance = points[tris[i + 0]*3 + 2]
+                                + points[tris[i + 1]*3 + 2]
+                                + points[tris[i + 2]*3 + 2];
+            triDists.push_back(distance);
+        }
+
+        std::sort(
+            trisByDist.begin(), 
+            trisByDist.end(), 
+            [&](auto a, auto b){return triDists[a] > triDists[b];}
+        );
+
+        for(auto i: trisByDist)
+        {
+            auto const * const pa = &points[3 * (tris[i*3 + 0] - 1)];
+            auto const * const pb = &points[3 * (tris[i*3 + 1] - 1)];
+            auto const * const pc = &points[3 * (tris[i*3 + 2] - 1)];
             auto const va = Vector3(pa[0], pa[1], pa[2]);
             auto const vb = Vector3(pb[0], pb[1], pb[2]);
             auto const vc = Vector3(pc[0], pc[1], pc[2]);
 
-            auto const distance = (va.z + vb.z + vc.z) * 0.333;
             auto const appearance = getAppearance(va, vb, vc);
 
             auto const scale = 5;
@@ -50,7 +70,7 @@ int main()
                 Vector2(va.x * scale + offsetX, va.y * scale + offsetY), 
                 Vector2(vb.x * scale + offsetX, vb.y * scale + offsetY), 
                 Vector2(vc.x * scale + offsetX, vc.y * scale + offsetY), 
-                distance, w, appearance
+                w, appearance
             );
         }
         
